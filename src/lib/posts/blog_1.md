@@ -35,9 +35,7 @@ Một số khái niệm chính trong hệ thống phân tán bao gồm:
 - Load Balancer (Cân bằng tải): Phân phối công việc đều giữa các máy tính trong hệ thống.
 - Replication (Sao chép): Tạo bản sao của dữ liệu để tăng tính sẵn sàng và khả năng chịu lỗi.
 ## Kiến trúc của hệ thống phân tán.
-Kiến trúc của hệ thống phân tán có thể được phân loại thành nhiều kiểu khác nhau:  
-![Logo GitHub]()
-
+Kiến trúc của hệ thống phân tán có thể được phân loại thành nhiều kiểu khác nhau:   
 - Kiến trúc máy khách - máy chủ (Client-Server): Máy khách gửi yêu cầu đến máy chủ để xử lý dữ liệu và trả kết quả.
 - Kiến trúc ngang hàng (Peer-to-Peer, P2P): Mỗi nút đều có thể đóng vai trò là máy khách hoặc máy chủ, giúp chia sẻ tài nguyên giữa các nút.  
 - Kiến trúc phân tầng: Các chức năng của hệ thống được phân rã thành các tầng, mỗi tầng thực hiện một nhiệm vụ cụ thể.
