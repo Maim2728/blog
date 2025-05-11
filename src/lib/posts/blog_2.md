@@ -56,8 +56,8 @@ Dưới đây là một số bài toán phổ biến trong ngành CNTT sử dụ
 
 
 ## Bảng liệt kê các trường hợp nên dùng thread, process và cả hai
-![Luồng1](../../../images/luong1.png)
-![Luồng2](../../../images/luong2.png)
+![Thu nhập 1](/images/luong1.png)
+![Luồng2](/images/luong2.png)
 
 
 ## Report về training ChatGPT bằng hệ thống phân tán

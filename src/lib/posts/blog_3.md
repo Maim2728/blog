@@ -21,7 +21,7 @@ Routing: RabbitMQ có khả năng định tuyến tin nhắn dựa trên các qu
 ![RabbitMQ](https://images.viblo.asia/9ef61449-fbed-436a-bd89-7e39ec5dbb50.png)
 
 ## Code đơn giản sử dụng RabbitMQ
-![Code](../../../images/coderabit.png)
+![Code](/images/coderabit.png)
 
 ## Ngoài thư viện xmlrpc, có nhiều thư viện khác hỗ trợ RPC (Remote Procedure Call) với các tính năng và định dạng khác nhau.
 Dưới đây là một số thư viện phổ biến:
@@ -34,4 +34,4 @@ Dưới đây là một số thư viện phổ biến:
 
 Code ví dụ sử dụng thư viện json-rpc:  
 
-![Code](../../../images/json.png)
+![Code](/images/json.png)
