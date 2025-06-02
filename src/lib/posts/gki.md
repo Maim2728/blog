@@ -65,37 +65,76 @@ Tốn tài nguyên: RAM và CPU tiêu tốn khá nhiều, đặc biệt với ch
 Không thay thế CSDL quan hệ: Không hỗ trợ các truy vấn JOIN phức tạp.
 
 Khó đồng bộ dữ liệu 2 chiều: Cần thiết kế kỹ để đồng bộ dữ liệu với hệ thống nguồn (DB).
-## Kế hoạch dự kiến:
-Dưới đây là kế hoạch công việc chi tiết cho từng tuần:
+## Kế hoạch dự kiến
+Tuần 1: Tìm hiểu ElasticSearch và chuẩn bị môi trường
+Nghiên cứu tổng quan về ElasticSearch:
 
-- Tuần 1: Tìm hiểu GhostDB, cài đặt server
-Nghiên cứu GhostDB: Tìm hiểu về GhostDB, các tính năng, cách hoạt động và lợi ích của việc sử dụng GhostDB làm lớp cache.
-Cài đặt server GhostDB:
-Tải và cài đặt GhostDB từ trang web chính thức.
-Cấu hình server GhostDB để đảm bảo hoạt động ổn định.
-Kiểm tra kết nối và xác nhận server hoạt động đúng cách.
-- Tuần 2: Xây dựng ứng dụng web mẫu (Node.js/Express hoặc Django)
-Chọn framework: Quyết định sử dụng Node.js/Express hoặc Django để xây dựng ứng dụng web mẫu.
-Xây dựng ứng dụng web:
-Tạo cấu trúc dự án.
-Xây dựng các chức năng cơ bản như đăng nhập, đăng ký, hiển thị danh sách sản phẩm và profile người dùng.
-Kiểm tra và đảm bảo ứng dụng hoạt động đúng cách.
-- Tuần 3: Tích hợp GhostDB làm lớp cache
-Tích hợp GhostDB:
-Cài đặt và cấu hình GhostDB trong ứng dụng web.
-Lưu danh sách sản phẩm và profile người dùng vào GhostDB.
-Kiểm tra và đảm bảo dữ liệu được lưu và truy xuất từ GhostDB đúng cách.
-- Tuần 4: So sánh hiệu năng
-Đo hiệu năng:
-Sử dụng Apache Benchmark và Postman để đo hiệu năng của ứng dụng web có và không có GhostDB.
-Đo log DB để phân tích chi tiết hiệu năng.
-So sánh kết quả:
-So sánh kết quả đo hiệu năng giữa hai trường hợp.
-Phân tích sự khác biệt và xác định lợi ích của việc sử dụng GhostDB.
-- Tuần 5: Viết báo cáo
-Đánh giá và biểu đồ hiệu năng:
-Tổng hợp kết quả đo hiệu năng và tạo biểu đồ để minh họa sự khác biệt.
-Đánh giá ưu nhược điểm của việc sử dụng GhostDB.
-Viết báo cáo:
-Viết báo cáo chi tiết về quá trình thực hiện, kết quả đo hiệu năng, và đánh giá tổng quan.
-Đưa ra kết luận và khuyến nghị dựa trên kết quả thu được.
+Tìm hiểu về kiến trúc, các khái niệm như index, shard, replica, cluster, query DSL.
+
+Đánh giá điểm mạnh, điểm yếu và các trường hợp ứng dụng thực tế của ElasticSearch.
+
+Cài đặt môi trường ElasticSearch:
+
+Cài đặt ElasticSearch (bản chính thức hoặc Docker).
+
+Thiết lập cluster đơn giản (1-3 node) để làm quen.
+
+Cài đặt công cụ hỗ trợ: Kibana để quản lý và truy vấn dữ liệu.
+
+Kiểm tra hoạt động của ElasticSearch cluster và kết nối với Kibana.
+
+Tuần 2: Xây dựng ứng dụng web mẫu (Node.js/Express hoặc Django)
+Chọn framework phù hợp cho backend (Node.js/Express hoặc Django).
+
+Tạo cấu trúc dự án web cơ bản.
+
+Xây dựng các chức năng cơ bản:
+
+Quản lý sản phẩm trà (CRUD).
+
+Đăng ký, đăng nhập người dùng.
+
+Hiển thị danh sách sản phẩm và profile người dùng.
+
+Kiểm tra hoạt động ứng dụng web, đảm bảo các chức năng chạy ổn định.
+
+Tuần 3: Tích hợp ElasticSearch vào ứng dụng web
+Thiết kế mapping index cho sản phẩm trong ElasticSearch (định nghĩa các trường, kiểu dữ liệu, analyzer).
+
+Xây dựng cơ chế đồng bộ dữ liệu giữa cơ sở dữ liệu chính (SQL/NoSQL) và ElasticSearch:
+
+Khi thêm/sửa/xóa sản phẩm, cập nhật dữ liệu trong ElasticSearch.
+
+Tích hợp module tìm kiếm ElasticSearch trong backend:
+
+Xây dựng API tìm kiếm sử dụng query DSL của ElasticSearch (full-text, filter, pagination).
+
+Kiểm tra và đảm bảo dữ liệu được lưu và truy vấn đúng trong ElasticSearch.
+
+Tuần 4: Đo hiệu năng và so sánh
+Thiết lập các kịch bản đo hiệu năng tìm kiếm trên ứng dụng web:
+
+Tìm kiếm theo tên, mô tả, filter theo giá, category...
+
+So sánh thời gian phản hồi và tải của API với và không dùng ElasticSearch.
+
+Sử dụng công cụ Apache Benchmark, Postman hoặc JMeter để đo tải và thời gian phản hồi.
+
+Thu thập log và phân tích hiệu suất ElasticSearch qua Kibana.
+
+So sánh kết quả, đánh giá mức cải thiện về tốc độ, độ chính xác tìm kiếm, khả năng xử lý tải lớn.
+
+Tuần 5: Viết báo cáo và đánh giá tổng quan
+Tổng hợp kết quả đo hiệu năng, tạo biểu đồ minh họa (thời gian phản hồi, throughput).
+
+Đánh giá ưu nhược điểm của việc sử dụng ElasticSearch trong hệ thống.
+
+Viết báo cáo chi tiết:
+
+Quá trình thực hiện từng bước.
+
+Phân tích kết quả đo đạc.
+
+Đánh giá tổng quan và rút ra bài học.
+
+Đề xuất các cải tiến hoặc mở rộng trong tương lai.
