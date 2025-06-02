@@ -5,7 +5,7 @@ updated: "2025-5-11"
 categories:
   - "sveltekit"
   - "markdown"
-coverImage: "https://camo.githubusercontent.com/b1d7b6267939d9a3e3b6335ad4261f9fd6047b8855a28f89a26b95885cf3c45d/68747470733a2f2f696d6775722e636f6d2f5a454746566f362e706e67"
+coverImage: "https://digitalis.io/wp-content/uploads/2020/12/Elastic600x340.jpg"
 coverWidth: 16
 coverHeight: 9
 excerpt: Check out how heading links work with this starter in this post.
