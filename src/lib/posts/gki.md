@@ -11,52 +11,60 @@ coverHeight: 9
 excerpt: Check out how heading links work with this starter in this post.
 ---
 
-## Đề xuất đề tài
-Tên đề tài:
-Ứng dụng GhostDB làm hệ thống cache phân tán cho ứng dụng web
+## 1. Đề tài:
+Ứng dụng ElasticSearch trong xây dựng hệ thống tìm kiếm phân tán cho website bán trà trực tuyến
 
-Mô tả:
-Trong các hệ thống web có lượng truy cập lớn, dữ liệu thường được truy vấn nhiều lần (như danh sách sản phẩm, thông tin người dùng, top trending, v.v). Việc mỗi lần truy vấn đều phải gọi đến cơ sở dữ liệu chính (database) sẽ gây quá tải, làm giảm hiệu suất hệ thống.
+## 2. Mô tả vấn đề cần giải quyết:
+Trong các website bán trà trực tuyến, khách hàng thường tìm kiếm các loại trà theo tên, mô tả, hương vị, giá, xuất xứ... Với số lượng sản phẩm đa dạng và dữ liệu lớn, hệ thống tìm kiếm truyền thống (dựa trên SQL, LIKE query) thường chậm và không chính xác khi xử lý tìm kiếm full-text, tìm kiếm gần đúng hoặc truy vấn phức tạp.
 
-Giải pháp:
-Sử dụng GhostDB như một lớp cache phân tán giúp lưu trữ tạm thời các dữ liệu được truy xuất thường xuyên. Khi có yêu cầu, ứng dụng web sẽ kiểm tra GhostDB trước (cache hit). Nếu không có, nó mới gọi đến database (cache miss), sau đó lưu lại kết quả vào GhostDB.
+Ngoài ra, khi lượng truy cập tăng lên đột biến (ví dụ các mùa khuyến mãi, sự kiện), hệ thống cần phải đảm bảo tốc độ phản hồi nhanh, không bị nghẽn hoặc downtime. Do đó, hệ thống tìm kiếm cần phải:
 
-Thực nghiệm:
-So sánh hiệu năng của hệ thống web (tốc độ phản hồi, số lần truy cập DB chính) khi có và không có GhostDB, dựa trên một trang web bán hàng mẫu.
+Xử lý nhanh các truy vấn tìm kiếm full-text, hỗ trợ phân tán dữ liệu.
 
-## Mục đích, điểm mạnh, điểm yếu, so sánh với thư viện khác
- Mục đích của GhostDB:
-GhostDB là một cơ sở dữ liệu key-value in-memory (lưu trên RAM), hoạt động thông qua TCP socket. Mục đích là để lưu trữ dữ liệu tạm thời, dễ truy cập, nhanh, và có thể phân tán trên nhiều node.
+Mở rộng linh hoạt khi dữ liệu và người dùng tăng lên.
 
- Giải quyết vấn đề gì?
+Đảm bảo độ chính xác, khả năng lọc nâng cao, phân tích dữ liệu để gợi ý sản phẩm.
 
-Tăng hiệu suất truy cập dữ liệu tạm thời (cache)
+## 3. Lý do chọn đề tài:
+ElasticSearch là thư viện tìm kiếm phân tán mã nguồn mở hàng đầu, tối ưu cho dữ liệu lớn, full-text, phi cấu trúc.
 
-Tối ưu khả năng xử lý đồng thời
+Thư viện hỗ trợ phân tán (cluster), tự động cân bằng dữ liệu, mở rộng quy mô dễ dàng, rất phù hợp với hệ thống thương mại điện tử có lưu lượng truy cập lớn.
 
-Giảm tải cho cơ sở dữ liệu chính
+Qua đề tài, ta có thể vận dụng kiến thức về hệ thống phân tán (cluster, sharding, replication), đồng thời hiểu sâu về hoạt động, ưu điểm và nhược điểm của ElasticSearch.
 
-Tương thích dễ dàng với các ứng dụng phân tán
+Giúp cải thiện trải nghiệm người dùng bằng công cụ tìm kiếm chính xác và nhanh chóng trên website bán trà.
 
- Điểm mạnh:
+## 4. Bản chất thư viện ElasticSearch
+4.1. Nguyên lý hoạt động
+ElasticSearch lưu trữ dữ liệu dưới dạng index (giống như bảng trong CSDL), mỗi index chia thành nhiều shard để phân tán dữ liệu trên nhiều node.
 
-Giao tiếp nhanh qua TCP, không cần máy chủ nặng
+Dữ liệu trong index được lưu dưới dạng document (bản ghi JSON).
 
-Dễ triển khai, cài đặt nhẹ
+Tìm kiếm sử dụng công nghệ full-text search dựa trên Apache Lucene, hỗ trợ phân tích cú pháp, tokenization, stemming, fuzziness...
 
-Hỗ trợ tự động xóa key theo thời gian (TTL)
+Hỗ trợ các loại truy vấn đa dạng: full-text, term query, range query, aggregation, geo, suggesters...
 
-Hoạt động tốt trong các kiến trúc microservices, realtime
+Cluster ElasticSearch tự động quản lý việc cân bằng dữ liệu, replication đảm bảo dự phòng.
 
- Điểm yếu:
+4.2. Điểm mạnh
+Hiệu năng cao: Tìm kiếm trong mili giây, xử lý hàng triệu document.
 
-Không có tính năng lưu dữ liệu bền vững (persistent storage)
+Phân tán dữ liệu: Dữ liệu tự động phân tán và đồng bộ giữa các node.
 
-Bảo mật cơ bản, không hỗ trợ xác thực phức tạp
+Khả năng mở rộng: Thêm/bớt node dễ dàng, không ảnh hưởng tới hoạt động hệ thống.
 
-Chưa phổ biến như Redis, ít tài liệu và cộng đồng hỗ trợ
-## Mục tiêu:
-Xây dựng một ứng dụng web mẫu (web bán hàng) và tích hợp GhostDB làm lớp cache để tăng hiệu năng khi truy xuất dữ liệu.
+Tính năng phong phú: Tìm kiếm full-text, phân tích nâng cao, gợi ý, lọc, phân nhóm dữ liệu.
+
+REST API: Dễ dàng tích hợp với mọi ứng dụng web, mobile.
+
+4.3. Điểm yếu
+Quản trị phức tạp: Cần kiến thức để cấu hình, tối ưu cluster.
+
+Tốn tài nguyên: RAM và CPU tiêu tốn khá nhiều, đặc biệt với chỉ mục lớn.
+
+Không thay thế CSDL quan hệ: Không hỗ trợ các truy vấn JOIN phức tạp.
+
+Khó đồng bộ dữ liệu 2 chiều: Cần thiết kế kỹ để đồng bộ dữ liệu với hệ thống nguồn (DB).
 ## Kế hoạch dự kiến:
 Dưới đây là kế hoạch công việc chi tiết cho từng tuần:
 
